@@ -1,0 +1,111 @@
+# Transformer from Scratch - 完整依赖包列表
+
+# 核心框架
+torch==2.0.1
+torchvision==0.15.2
+torchaudio==2.0.2
+
+# 数据处理和科学计算
+numpy==1.24.3
+pandas==2.0.3
+scipy==1.11.1
+
+# 数据可视化和绘图
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.15.0
+
+# 数据加载和网络请求
+requests==2.31.0
+tqdm==4.65.0
+urllib3==1.26.16
+
+# 配置和日志
+PyYAML==6.0
+colorlog==6.7.0
+tensorboard==2.13.0
+
+# 工具和工具包
+Pillow==10.0.1
+opencv-python==4.8.1.78
+scikit-learn==1.3.0
+
+# 开发工具（可选）
+black==23.7.0
+flake8==6.1.0
+isort==5.12.0
+pytest==7.4.0
+
+# Jupyter支持（可选）
+jupyter==1.0.0
+ipython==8.14.0
+ipywidgets==8.1.1
+
+# 其他工具包
+wandb==0.15.9
+accelerate==0.22.0
+transformers==4.33.3
+
+# 系统工具包
+psutil==5.9.5
+GPUtil==1.4.0
+py-cpuinfo==9.0.0
+
+安装说明
+完整安装
+pip install -r requirements.txt
+仅核心依赖安装
+pip install torch numpy matplotlib requests tqdm PyYAML
+开发环境安装
+pip install -r requirements.txt
+pip install black flake8 isort pytest
+GPU版本安装（如果使用CUDA）
+# 首先安装适合您CUDA版本的PyTorch
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# 然后安装其他依赖
+pip install -r requirements.txt
+环境配置指南
+1. 使用conda创建环境
+conda create -n transformer python=3.10
+conda activate transformer
+pip install -r requirements.txt
+2. 使用venv创建环境
+python -m venv transformer-env
+source transformer-env/bin/activate  # Linux/Mac
+# 或
+transformer-env\Scripts\activate     # Windows
+pip install -r requirements.txt
+3. Docker环境（可选）
+FROM python:3.10-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+CMD ["python", "src/main.py"]
+版本兼容性
+Python: 3.8, 3.9, 3.10, 3.11
+PyTorch: 1.9.0+ (推荐2.0.0+)
+CUDA: 11.7, 11.8 (可选)
+操作系统: Linux, Windows, macOS
+
+故障排除
+常见问题解决
+PyTorch安装失败
+# 尝试使用conda安装
+conda install pytorch torchvision torchaudio -c pytorch
+CUDA版本不匹配
+# 检查CUDA版本
+nvcc --version
+# 安装对应版本的PyTorch
+依赖冲突
+# 创建干净环境重新安装
+pip install --upgrade pip
+pip cache purge
+pip install -r requirements.txt
+验证安装
+python -c "import torch; print(f'PyTorch版本: {torch.__version__}')"
+python -c "import torch; print(f'CUDA可用: {torch.cuda.is_available()}')"
+python -c "import numpy; print(f'NumPy版本: {numpy.__version__}')"
